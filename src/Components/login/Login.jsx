@@ -65,7 +65,7 @@ export default function SignInSide() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, setLogin] = useState("Login");
+  const [loginText, setLogin] = useState("Login");
 
   //   const [username, setPassword] = useState("");
 
@@ -116,7 +116,7 @@ export default function SignInSide() {
               className={classes.submit}
               //   onClick={login}
             >
-              {login}
+              {loginText}
             </Button>
             <Grid container>
               <Grid item xs>
