@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 export default function SignInSide() {
   const login = e => {
     e.preventDefault();
-    if (email === "admin" && password === "admin") {
+    if (email === "admin@admin.com" && password === "admin") {
       setTimeout(() => {
         setLogin("Verifying");
       }, 500);
