@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "../../axios/axios";
 import loginRequest from "../../axios/login";
+import { withRouter } from "react-router-dom";
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -48,15 +49,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignInSide() {
+function SignInSide(props) {
   const login = e => {
     e.preventDefault();
     if (email === "admin@admin.com" && password === "admin") {
-      setTimeout(() => {
-        setLogin("Verifying");
-      }, 500);
+      setLogin("Verifying");
       setTimeout(() => {
         setLogin("Setting up things....");
+      }, 2000);
+      setTimeout(() => {
+        localStorage.setItem("id", "admin@admin.com");
+        props.history.push("/");
       }, 2000);
     }
     // axios.post("", loginRequest).then(res => console.log(res));
@@ -139,3 +142,5 @@ export default function SignInSide() {
     </Grid>
   );
 }
+
+export default withRouter(SignInSide);

@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-
+import { withRouter } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -21,9 +21,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function MenuAppBar() {
+function MenuAppBar(props) {
   useEffect(() => {
-    localStorage.getItem("id") ? setAuth(true) : setAuth(false);
+    localStorage.getItem("id") ? setAuth(true) : props.history.push("/login");
   }, []);
 
   const classes = useStyles();
@@ -73,7 +73,14 @@ function MenuAppBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    localStorage.removeItem("id");
+                    props.history.push("/login");
+                  }}
+                >
+                  Log out
+                </MenuItem>
               </Menu>
             </div>
           )}
@@ -83,4 +90,4 @@ function MenuAppBar() {
   );
 }
 
-export default MenuAppBar;
+export default withRouter(MenuAppBar);
