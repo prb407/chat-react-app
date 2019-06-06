@@ -51,12 +51,22 @@ const useStyles = makeStyles(theme => ({
 export default function SignInSide() {
   const login = e => {
     e.preventDefault();
-    axios.post("", loginRequest).then(res => console.log(res));
+    if (email === "admin" && password === "admin") {
+      setTimeout(() => {
+        setLogin("Verifying");
+      }, 500);
+      setTimeout(() => {
+        setLogin("Setting up things....");
+      }, 2000);
+    }
+    // axios.post("", loginRequest).then(res => console.log(res));
   };
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [login, setLogin] = useState("Login");
+
   //   const [username, setPassword] = useState("");
 
   return (
@@ -106,7 +116,7 @@ export default function SignInSide() {
               className={classes.submit}
               //   onClick={login}
             >
-              Sign In
+              {login}
             </Button>
             <Grid container>
               <Grid item xs>
