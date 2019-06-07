@@ -76,6 +76,8 @@ function MenuAppBar(props) {
                 <MenuItem
                   onClick={() => {
                     localStorage.removeItem("id");
+                    localStorage.removeItem("email");
+                    localStorage.removeItem("key");
                     props.history.push("/login");
                   }}
                 >

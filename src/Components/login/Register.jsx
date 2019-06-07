@@ -53,35 +53,24 @@ function SignInSide(props) {
     e.preventDefault();
     // if (email === "admin@admin.com" && password === "admin") {
     seterrorText("");
-    setLogin("Verifing...");
+    setLogin("Registering...");
     axios
       .post("", {
-        query: `query{
-      login(email:"${email}",password:"${password}"){
-        id
-        email
-        key
-      }
-    }`
+        query: `mutation{
+        createUser(email:"${email}",password:"${password}"){
+          id
+          email
+        }
+      } `
       })
       .then(res => {
         // console.log(res.data);
         // return;
-
+        setLogin("Register");
         if (res.data.errors) {
           seterrorText(res.data.errors[0].message);
-          setLogin("Login");
         } else {
-          setTimeout(() => {
-            setLogin("Setting up things....");
-          }, 1000);
-          const { id, email, key } = res.data.data.login;
-          localStorage.setItem("id", id);
-          localStorage.setItem("email", email);
-          localStorage.setItem("key", key);
-          setTimeout(() => {
-            props.history.push("/");
-          }, 2000);
+          props.history.push("/login");
         }
       });
 
@@ -91,7 +80,7 @@ function SignInSide(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginText, setLogin] = useState("Login");
+  const [loginText, setLogin] = useState("Register");
   const [errorText, seterrorText] = useState("");
 
   //   const [username, setPassword] = useState("");
@@ -106,7 +95,7 @@ function SignInSide(props) {
             <LockOutlinedIcon />
           </Avatar> */}
           <Typography component="h1" variant="h5">
-            Login
+            Register
           </Typography>
           <form className={classes.form} onSubmit={login}>
             <TextField
@@ -151,8 +140,8 @@ function SignInSide(props) {
                 <span style={{ color: "red" }}>{errorText}</span>
               </Grid>
               <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/login" variant="body2">
+                  {"Don have an account? Login"}
                 </Link>
               </Grid>
             </Grid>
