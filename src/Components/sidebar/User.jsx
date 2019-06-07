@@ -6,7 +6,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 
 import Profilepicmodel from "../other/ProfilepicModel.jsx";
 
-function ClippedDrawer({ text }) {
+function ClippedDrawer({ text, id }) {
   const [profilemodel, setProfilemodel] = useState(false);
   const closeProfile = () => {
     setProfilemodel(false);
@@ -26,7 +26,7 @@ function ClippedDrawer({ text }) {
       <ListItemText
         primary={text}
         onClick={() => {
-          alert(text);
+          alert(id);
         }}
       />
     </ListItem>
